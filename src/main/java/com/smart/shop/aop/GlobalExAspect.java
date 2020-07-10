@@ -13,10 +13,9 @@ public class GlobalExAspect {
     //    @Pointcut(value = "@annotation(org.springframework.web.bind.annotation.RestController)")
     @Pointcut(value = "execution(* com.smart.shop.controller.*(..))")
     public void pointcut() {
-
-
+        System.out.println(1111);
     }
-    
+
     @AfterThrowing(pointcut = "pointcut()", throwing = "exception")
     public ResponseEntity afterThrowing(Exception exception) {
         if (exception instanceof ServiceException) {
@@ -24,6 +23,5 @@ public class GlobalExAspect {
         }
         return ResponseEntity.error();
     }
-
 
 }

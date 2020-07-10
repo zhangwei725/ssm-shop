@@ -23,5 +23,4 @@ public class GlobalExAspect {
         }
         return ResponseEntity.error();
     }
-
 }

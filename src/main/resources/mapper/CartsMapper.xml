@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.shop.mapper.CartsMapper">
+    <resultMap id="BaseResultMap" type="com.smart.shop.domain.entity.Carts">
+        <id column="cart_id" jdbcType="INTEGER" property="cartId"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="quantity" jdbcType="INTEGER" property="quantity"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="pid" javaType="INTEGER" property="pid"/>
+        <result column="product_pic" jdbcType="VARCHAR" property="productPic"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="product_attr" jdbcType="VARCHAR" property="productAttr"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+
+    <select id="selectByMidAndPid" resultMap="BaseResultMap">
+        SELECT c.member_id, c.cart_id, c.quantity, c.pid
+        FROM carts c
+        WHERE status = 1;
+    </select>
+    <update id="update">
+        UPDATE carts
+        SET quantity = #{num}
+        WHERE cart_id = #{cartsId}
+          AND status = 1
+    </update>
+    <insert id="insert">
+        INSERT INTO carts(member_id, quantity, price, product_pic, product_name, product_attr, pid)
+        VALUES (#{carts.memberId}, #{carts.quantity}, #{carts.price}, #{carts.productPic}, #{carts.productName},
+                #{carts.productAttr}, #{carts.pid})
+    </insert>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT *
+        FROM carts
+        WHERE member_id = #{mid}
+          AND status = 1
+    </select>
+    <update id="updateBatch">
+        UPDATE carts
+        SET status=0
+        WHERE cart_id IN
+        <foreach collection="ids" separator="," open="(" close=")" item="id">
+            #{id}
+        </foreach>
+        and status=1
+    </update>
+</mapper>

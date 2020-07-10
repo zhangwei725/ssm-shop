@@ -13,6 +13,8 @@ public class GlobalExAspect {
     //    @Pointcut(value = "@annotation(org.springframework.web.bind.annotation.RestController)")
     @Pointcut(value = "execution(* com.smart.shop.controller.*(..))")
     public void pointcut() {
+
+
     }
     
     @AfterThrowing(pointcut = "pointcut()", throwing = "exception")

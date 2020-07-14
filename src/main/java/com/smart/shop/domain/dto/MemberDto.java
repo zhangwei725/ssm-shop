@@ -9,7 +9,6 @@ import java.util.Date;
  */
 @Data
 public class MemberDto {
-
     // 查询的关键字  手机号 用户名 邮箱
     private String keyword;
     private Long memberId;

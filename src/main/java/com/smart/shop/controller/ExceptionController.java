@@ -12,5 +12,4 @@ public class ExceptionController {
         int i = 10 / 0;
         return ResponseEntity.success("测试异常");
     }
-
 }
